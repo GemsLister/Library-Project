@@ -24,6 +24,7 @@
 
 * button{
     font-family: var(--nunito);
+    cursor: pointer;
 }
 
 * p,
@@ -110,6 +111,18 @@ form .submit-close{
     justify-content: space-between;
 }
 
+#card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 10px;
+    background-color: azure;
+}
+
+.card{
+    display: grid;
+    width: minmax(320px, 500px);
+    border: 2px solid black;
+}
 
 @media (width < 426px){
     form{
