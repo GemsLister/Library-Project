@@ -55,9 +55,12 @@ function addBookToLibrary() {
 function display(){
     const cardContainer = document.getElementById('card-container');
     cardContainer.textContent = '';
+    cardContainer.classList = 'card-container';
     //   For Each Loop
     myLibrary.forEach((book, index) => {
-        // Title
+      const card = document.createElement('article');  
+      card.classList = 'card';
+      // Title
         const cardTitle = document.createElement('p');
         cardTitle.textContent = `Title: ${book.titleVal}`;
 
@@ -83,9 +86,10 @@ function display(){
             myLibrary.splice(index, 1);
             display();
         })
+
         // Read or not
         const readOrNotButton = document.createElement('button');
-
+        readOrNotButton.classList = 'read-or-not-button';
         if(book.readVal){
             cardReadStatus.textContent = `Read`;
             readOrNotButton.textContent = `Not Read`;
@@ -95,7 +99,23 @@ function display(){
             readOrNotButton.textContent = `Read`;
         }
 
+        //Toggle
+        readOrNotButton.addEventListener('click', () => {
+          const changeReadStatus = document.querySelector('.read-or-not-button');
+
+          if(changeReadStatus.textContent === 'Not Read'){
+            cardReadStatus.textContent = `Not Read`;
+            readOrNotButton.textContent = `Read`;
+          }
+          else if(changeReadStatus.textContent === 'Read'){
+              cardReadStatus.textContent = `Read`;
+              readOrNotButton.textContent = `Not Read`;
+          }
+          
+        })
+
         deleteOrRead.append(deleteButton, readOrNotButton);
-        cardContainer.append(cardTitle, cardAuthor, cardPages, cardReadStatus, deleteOrRead);
+        card.append(cardTitle, cardAuthor, cardPages, cardReadStatus, deleteOrRead)
+        cardContainer.append(card);
     })
 }
