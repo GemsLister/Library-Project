@@ -61,61 +61,69 @@ function display(){
       const card = document.createElement('article');  
       card.classList = 'card';
       // Title
-        const cardTitle = document.createElement('p');
-        cardTitle.textContent = `Title: ${book.titleVal}`;
+      const cardTitle = document.createElement('h3');
+      cardTitle.textContent = `Title: ${book.titleVal}`;
 
-        // Author
-        const cardAuthor = document.createElement('p');
-        cardAuthor.textContent = `Author: ${book.authorVal}`;
+      // Author
+      const cardAuthor = document.createElement('p');
+      cardAuthor.textContent = `Author: ${book.authorVal}`;
 
-        // Pages
-        const cardPages = document.createElement('p');
-        cardPages.textContent = `Pages: ${book.pagesVal}`;
-        
-        // Read or Not
-        const cardReadStatus = document.createElement('p');
-        
-        // Delete Button and Read or Not Button 
-        const deleteOrRead = document.createElement('div');
-        deleteOrRead.classList = 'delete-or-read';
-        // Delete
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
+      // Pages
+      const cardPages = document.createElement('h3');
+      cardPages.textContent = `Pages: ${book.pagesVal}`;
+      
+      // Read or Not
+      const cardReadStatus = document.createElement('h3');
+      
+      // Delete Button and Read or Not Button 
+      const deleteOrRead = document.createElement('div');
+      deleteOrRead.classList = 'delete-or-read';
+      // Delete
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Delete';
 
-        deleteButton.addEventListener('click', () => {
-            myLibrary.splice(index, 1);
-            display();
-        })
+      deleteButton.addEventListener('click', () => {
+          myLibrary.splice(index, 1);
+          display();
+      })
 
-        // Read or not
-        const readOrNotButton = document.createElement('button');
-        readOrNotButton.classList = 'read-or-not-button';
-        if(book.readVal){
+      // Read or not
+      const readOrNotButton = document.createElement('button');
+      readOrNotButton.classList = 'read-or-not-button';
+      if(book.readVal){
+          cardReadStatus.textContent = `Read`;
+          readOrNotButton.textContent = `Not Read`;
+      }
+      else if(!book.readVal){
+          cardReadStatus.textContent = `Not Read`;
+          readOrNotButton.textContent = `Read`;
+      }
+
+      //Toggle
+      readOrNotButton.addEventListener('click', () => {
+        book.readVal = !book.readVal;
+
+        if(!book.readVal){
+          cardReadStatus.textContent = `Not Read`;
+          readOrNotButton.textContent = `Read`;
+        }
+        else if(book.readVal){
             cardReadStatus.textContent = `Read`;
             readOrNotButton.textContent = `Not Read`;
         }
-        else if(!book.readVal){
-            cardReadStatus.textContent = `Not Read`;
-            readOrNotButton.textContent = `Read`;
-        }
+        // const changeReadStatus = document.querySelector('.read-or-not-button');
+        // if(changeReadStatus.textContent === 'Not Read'){
+        //   cardReadStatus.textContent = `Not Read`;
+        //   changeReadStatus.textContent = 'Read';
+        // }
+        // else if(changeReadStatus.textContent === 'Read'){
+        //   cardReadStatus.textContent = `Read`;
+        //   changeReadStatus.textContent = 'Not Read';
+        // }
+      })
 
-        //Toggle
-        readOrNotButton.addEventListener('click', () => {
-          const changeReadStatus = document.querySelector('.read-or-not-button');
-
-          if(changeReadStatus.textContent === 'Not Read'){
-            cardReadStatus.textContent = `Not Read`;
-            readOrNotButton.textContent = `Read`;
-          }
-          else if(changeReadStatus.textContent === 'Read'){
-              cardReadStatus.textContent = `Read`;
-              readOrNotButton.textContent = `Not Read`;
-          }
-          
-        })
-
-        deleteOrRead.append(deleteButton, readOrNotButton);
-        card.append(cardTitle, cardAuthor, cardPages, cardReadStatus, deleteOrRead)
-        cardContainer.append(card);
+      deleteOrRead.append(deleteButton, readOrNotButton);
+      card.append(cardTitle, cardAuthor, cardPages, cardReadStatus, deleteOrRead)
+      cardContainer.append(card);
     })
 }
